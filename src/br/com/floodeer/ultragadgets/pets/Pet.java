@@ -2,35 +2,27 @@ package br.com.floodeer.ultragadgets.pets;
 
 import org.bukkit.Location;
 import org.bukkit.craftbukkit.v1_8_R3.CraftWorld;
-import org.bukkit.entity.Enderman;
-import org.bukkit.entity.Endermite;
-import org.bukkit.entity.Entity;
-import org.bukkit.entity.EntityType;
-import org.bukkit.entity.Ocelot;
-import org.bukkit.entity.Player;
-import org.bukkit.entity.Sheep;
-import org.bukkit.entity.Skeleton;
-import org.bukkit.entity.Slime;
-import org.bukkit.entity.Villager;
-import org.bukkit.entity.Wolf;
-import org.bukkit.entity.Zombie;
+import org.bukkit.entity.*;
 import org.bukkit.event.entity.CreatureSpawnEvent.SpawnReason;
+import org.bukkit.metadata.FixedMetadataValue;
 import org.bukkit.scheduler.BukkitRunnable;
 
 import br.com.floodeer.ultragadgets.UltraGadgets;
-import br.com.floodeer.ultragadgets.enumeration.PetType;
+import br.com.floodeer.ultragadgets.enumeration.Pets;
 import br.com.floodeer.ultragadgets.util.EntityUtils;
+import net.md_5.bungee.api.ChatColor;
 
 public abstract class Pet {
 
-	public PetType type;
+	public Pets type;
 	public EntityType entityType;
 	public Entity entity;
 	public Class<? extends Entity> entityClass;
 	public Player owner;
 	public int updateSteps;
+	public boolean angryEntity;
 	
-	public Pet(PetType type, Player owner) {
+	public Pet(Pets type, Player owner) {
 		if(owner != null) {
 			this.owner = owner;
 			switch (type) {
@@ -74,9 +66,12 @@ public abstract class Pet {
 				entityType = EntityType.ZOMBIE;
 				entityClass = Zombie.class;
 				break;
-			default:
+			case RABBIT:
+				entityType = EntityType.RABBIT;
+				entityClass = Rabbit.class;
 				break;
 			}
+			angryEntity = false;
 			spawn();
 			teleportToOwner(owner);
 			startScheduler();
@@ -86,16 +81,21 @@ public abstract class Pet {
 	
 	protected void spawn() {
 	     this.entity = ((CraftWorld)owner.getWorld()).spawn(owner.getLocation(), entityClass, SpawnReason.CUSTOM);
-	 	 PetManager.create(this.owner, entity);
-	 	 onSpawn(entity);
+	 	 this.entity.setMetadata("ugPet", new FixedMetadataValue(UltraGadgets.get(), true));
+	     PetManager.create(this.owner, this.entity, this);
+	 	 onSpawn();
 	}
 	
 	protected void startScheduler() {
 		new BukkitRunnable() {
 			@Override
 			public void run() {
-				onScheduler();
+				if(!entity.isValid() || Pets.getEntityPet(owner).getType() != entity.getType() || !Pets.hasPetSpawned(owner) || !owner.isOnline()) {
+					cancel();
+					return;
+				}
 				++updateSteps;
+				onScheduler();
 				if(updateSteps > 10) {
 					updateSteps =- 0;
 				}
@@ -114,9 +114,31 @@ public abstract class Pet {
 			EntityUtils.CreatureMove(this.entity, to, 0.3f);
 	}
 	
-	public abstract void onScheduler();
+	public void setName(String name) {
+		this.entity.setCustomNameVisible(true);
+		this.entity.setCustomName(ChatColor.translateAlternateColorCodes('&', name));
+	}
 	
-	public abstract void onSpawn(Entity e);
+	public void setAngry(boolean x) {
+		this.angryEntity = x;
+		if(x) {
+		    if(this.entity.getType() == EntityType.WOLF) {
+		    	((Wolf)this.entity).setAngry(true);
+		    }
+		}else{
+			if(this.entity.getType() == EntityType.WOLF) {
+		    	((Wolf)this.entity).setAngry(false);
+		    }
+		}
+	}
+	
+	public void despawn() {
+		this.entity.remove();
+	}
+	
+	abstract void onScheduler();
+	
+	abstract void onSpawn();
 	
 	public Player getPlayer() {
 		return owner;
@@ -134,7 +156,7 @@ public abstract class Pet {
 		return entityType;
 	}
 	
-	public PetType getPetType() {
+	public Pets getPetType() {
 		return type;
 	}
 	
@@ -148,5 +170,17 @@ public abstract class Pet {
 	
 	public int updateStep() {
 		return updateSteps;
+	}
+	
+	public String getRawName() {
+		return ChatColor.stripColor(this.entity.getName());
+	}
+	
+	public String getName() {
+		return this.entity.getName();
+	}
+	
+	public boolean isAngry() {
+		return angryEntity;
 	}
 }

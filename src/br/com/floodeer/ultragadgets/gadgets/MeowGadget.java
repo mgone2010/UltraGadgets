@@ -28,7 +28,7 @@ import br.com.floodeer.ultragadgets.util.UtilTitle;
 public class MeowGadget extends Gadget implements Listener {
 
 	public MeowGadget() {
-		super(UltraGadgets.getCfg().meowCooldown * 1000, "Meow", Gadgets.MEOW, Material.BLAZE_ROD);
+		super(UltraGadgets.getCfg().meowCooldown * 1000, "Meow", Gadgets.FUN_GUN, Material.BLAZE_ROD);
 	}
 	
 	List<Player> launched = new ArrayList<>();

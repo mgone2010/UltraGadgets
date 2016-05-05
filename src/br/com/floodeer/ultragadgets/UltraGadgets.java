@@ -2,35 +2,44 @@ package br.com.floodeer.ultragadgets;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.UUID;
 
 import org.apache.commons.lang.SystemUtils;
 import org.apache.commons.lang.Validate;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.configuration.InvalidConfigurationException;
+import org.bukkit.entity.Player;
 import org.bukkit.event.Listener;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import br.com.floodeer.ultragadgets.config.ConfigFile;
+import br.com.floodeer.ultragadgets.enumeration.Particle;
+import br.com.floodeer.ultragadgets.enumeration.Pets;
 import br.com.floodeer.ultragadgets.gadgets.BombGadget;
+import br.com.floodeer.ultragadgets.gadgets.DiscoBallGadget;
 import br.com.floodeer.ultragadgets.gadgets.DjGadget;
+import br.com.floodeer.ultragadgets.gadgets.ExplosivePoopGadget;
+import br.com.floodeer.ultragadgets.gadgets.FumeganteGadget;
 import br.com.floodeer.ultragadgets.gadgets.GravityGadget;
+import br.com.floodeer.ultragadgets.gadgets.IceBombGadget;
 import br.com.floodeer.ultragadgets.gadgets.MeowGadget;
 import br.com.floodeer.ultragadgets.gadgets.PaintballGunGadget;
 import br.com.floodeer.ultragadgets.gadgets.ParaquedasGadget;
 import br.com.floodeer.ultragadgets.gadgets.PartyPopperGadget;
+import br.com.floodeer.ultragadgets.gadgets.SmokeBombGadget;
 import br.com.floodeer.ultragadgets.gadgets.TrampolimGadget;
 import br.com.floodeer.ultragadgets.gadgets.VectorTNTGadget;
 import br.com.floodeer.ultragadgets.gadgets.WitherShootGadget;
 import br.com.floodeer.ultragadgets.gadgets.WizardGadget;
-import br.com.floodeer.ultragadgets.gadgets.IceBombGadget;
 import br.com.floodeer.ultragadgets.listener.PlayerListener;
 import br.com.floodeer.ultragadgets.listener.PlayerLocationListener;
 import br.com.floodeer.ultragadgets.listener.ServerStep;
 import br.com.floodeer.ultragadgets.menus.GadgetsMenu;
 import br.com.floodeer.ultragadgets.menus.MainMenu;
 import br.com.floodeer.ultragadgets.menus.ParticlesMenu;
+import br.com.floodeer.ultragadgets.menus.PetMenu;
 import br.com.floodeer.ultragadgets.particles.CloudParticle;
 import br.com.floodeer.ultragadgets.particles.FrozenParticle;
 import br.com.floodeer.ultragadgets.particles.FuriousParticle;
@@ -40,6 +49,8 @@ import br.com.floodeer.ultragadgets.particles.MagicParticle;
 import br.com.floodeer.ultragadgets.particles.RorationParticles;
 import br.com.floodeer.ultragadgets.particles.ShieldParticle;
 import br.com.floodeer.ultragadgets.particles.TornadoParticle;
+import br.com.floodeer.ultragadgets.pets.PetCreator;
+import br.com.floodeer.ultragadgets.pets.PetManager;
 import br.com.floodeer.ultragadgets.scheduler.SchedulerRunner;
 import br.com.floodeer.ultragadgets.util.Glow;
 import br.com.floodeer.ultragadgets.util.Gravity;
@@ -65,6 +76,10 @@ public class UltraGadgets extends JavaPlugin implements Listener {
 
 	public static PastebinReporter getReporter() {
 		return pastebinReporter;
+	}
+	
+	public static UltraPlayer getUPlayer(UUID uuid) {
+		return PlayerListener.get(uuid);
 	}
 	
 	public static void log(Object message) {
@@ -132,12 +147,14 @@ public class UltraGadgets extends JavaPlugin implements Listener {
 		pm.registerEvents(new PartyPopperGadget(), this);
 		pm.registerEvents(new PaintballGunGadget(), this);
 		pm.registerEvents(new ParaquedasGadget(), this);
+		pm.registerEvents(new ExplosivePoopGadget(), this);
 		pm.registerEvents(new TrampolimGadget(), this);
 		pm.registerEvents(new IceBombGadget(), this);
 		pm.registerEvents(new DjGadget(), this);
 		pm.registerEvents(new VectorTNTGadget(), this);
 		pm.registerEvents(new WitherShootGadget(), this);
 		pm.registerEvents(new GravityGadget(), this);
+		pm.registerEvents(new DiscoBallGadget(), this);
 		pm.registerEvents(new WizardGadget(), this);
 		pm.registerEvents(new PlayerListener(), this);
 		pm.registerEvents(new MainMenu(), this);
@@ -155,6 +172,11 @@ public class UltraGadgets extends JavaPlugin implements Listener {
 		pm.registerEvents(new PlayerLocationListener(), this);
 		pm.registerEvents(new Gravity(), this);
 		pm.registerEvents(new ServerStep(), this);
+		pm.registerEvents(new PetManager(), this);
+		pm.registerEvents(new PetMenu(), this);
+		pm.registerEvents(new PetCreator(), this);
+		pm.registerEvents(new FumeganteGadget(), this);
+		pm.registerEvents(new SmokeBombGadget(), this);
 	}
 	
 	@Override
@@ -192,22 +214,13 @@ public class UltraGadgets extends JavaPlugin implements Listener {
 			log("&7Criado pasta UltraGadgets/sons");
 		}
 		log("&7Extraíndo recursos...");
-		saveResource("sons.zip", true);
-        String input = new File(getDataFolder(), "sons.zip").toString();
-        File output = new File(getDataFolder() + File.separator + "sons");
+    	saveResource("sons.zip", true);
+    	String input = new File(getDataFolder() + File.separator + "sons.zip").toString();
+        String output = new File(getDataFolder() + File.separator + "sons").toString();
         try {
-			UnZip.unzip(input, output.getAbsolutePath());
+			UnZip.unzip(input, output);
 		} catch (IOException e) {
 			e.printStackTrace();
-		}
-		log("&7Criando pasta sons.zip");
-		try {
-			
-			UnZip.unzip(getDataFolder() + File.separator + "sons.zip", getDataFolder().getAbsolutePath());
-			log("&7Pasta sons.zip extraída com sucesso!");
-		} catch (IOException e) {
-			e.printStackTrace();
-			log("&cFalha ao extrair sons.zip.");
 		}
 		log(" ");
 		log("&aPlugin habilitado com sucesso!");
@@ -216,6 +229,21 @@ public class UltraGadgets extends JavaPlugin implements Listener {
 	
 	@Override
 	public void onDisable() {
+		log("&7Desfazendo partículas pets e Gadgets...");
+		for(Player p : Bukkit.getOnlinePlayers()) {
+			if(Particle.hasParticle(p)) {
+				Particle.remove(p);
+			}
+			if(Pets.hasPetSpawned(p)) {
+				Pets.getPetEntity(p).despawn();
+				if(PetManager.petEntity.containsKey(p.getUniqueId())) {
+					PetManager.petEntity.remove(p.getUniqueId());
+				}
+				if(PetManager.petType.containsKey(p.getUniqueId())) {
+					PetManager.petType.remove(p.getUniqueId());
+				}
+			}
+		}
 		log("&7Descarregado com sucesso!");
 	}
 }

@@ -51,7 +51,7 @@ public class GadgetsMenu extends Menu implements Listener {
 			gadgets.setItem(12, ItemFactory.buildItemStackArrays(Material.valueOf(c.noPermItem), "§cMeow",
 					Arrays.asList("§cSem permissões."), 1, (byte) c.noPermItemData));
 		} else {
-			if (Gadgets.getPlayerGadget(p) == Gadgets.MEOW) {
+			if (Gadgets.getPlayerGadget(p) == Gadgets.FUN_GUN) {
 				gadgets.setItem(12, ItemFactory.buildGlowedItemStack(Material.BLAZE_ROD,
 						c.bombaGadgetNome.replaceAll("&", "§"), ItemFactory.colorList(c.meowGadgetLore)));
 			} else {
@@ -159,6 +159,47 @@ public class GadgetsMenu extends Menu implements Listener {
 				gadgets.setItem(23, ItemFactory.buildItemStack(Material.IRON_HOE, c.wizardNome.replaceAll("&", "§"), ItemFactory.colorList(c.wizardLore)));
 			}
 		}
+
+		if (!p.hasPermission("ug.gadgets.fumegante")) {
+			gadgets.setItem(24, ItemFactory.buildItemStackArrays(Material.valueOf(c.noPermItem), "§cFumegante",Arrays.asList("§cSem permissões."), 1, (byte) c.noPermItemData));
+		} else {
+			if (Gadgets.getPlayerGadget(p) == Gadgets.FUMEGANTE) {
+				gadgets.setItem(24, ItemFactory.buildGlowedItemStack(Material.BLAZE_POWDER, c.fumeganteNome.replaceAll("&", "§"), ItemFactory.colorList(c.fumeganteLore)));
+			} else {
+				gadgets.setItem(24, ItemFactory.buildItemStack(Material.BLAZE_POWDER, c.fumeganteNome.replaceAll("&", "§"), ItemFactory.colorList(c.fumeganteLore)));
+			}
+		}
+		
+		if (!p.hasPermission("ug.gadgets.explosivepoop")) {
+			gadgets.setItem(25, ItemFactory.buildItemStackArrays(Material.valueOf(c.noPermItem), "§cExplosive Poop",Arrays.asList("§cSem permissões."), 1, (byte) c.noPermItemData));
+		} else {
+			if (Gadgets.getPlayerGadget(p) == Gadgets.EXPLOSIVE_POOP) {
+				gadgets.setItem(25, ItemFactory.buildGlowedItemStackArrays(Material.INK_SACK, c.explosivePoopNome.replaceAll("&", "§"), ItemFactory.colorList(c.explosivePlore), 1, (byte)3));
+			} else {
+				gadgets.setItem(25, ItemFactory.buildItemStackArrays(Material.INK_SACK, c.explosivePoopNome.replaceAll("&", "§"), ItemFactory.colorList(c.explosivePlore), 1, (byte)3));
+			}
+		}
+		
+		if (!p.hasPermission("ug.gadgets.discoball")) {
+			gadgets.setItem(28, ItemFactory.buildItemStackArrays(Material.valueOf(c.noPermItem), "§cDiscoBall",Arrays.asList("§cSem permissões."), 1, (byte) c.noPermItemData));
+		} else {
+			if (Gadgets.getPlayerGadget(p) == Gadgets.DISCO_BALL) {
+				gadgets.setItem(28, ItemFactory.buildGlowedItemStackArrays(Material.STAINED_GLASS, c.discoBallNome.replaceAll("&", "§"), ItemFactory.colorList(c.discoBallLore), 1, (byte)12));
+			} else {
+				gadgets.setItem(28, ItemFactory.buildItemStackArrays(Material.STAINED_GLASS, c.discoBallNome.replaceAll("&", "§"), ItemFactory.colorList(c.discoBallLore), 1, (byte)12));
+			}
+		}
+		
+		if (!p.hasPermission("ug.gadgets.smokebomb")) {
+			gadgets.setItem(29, ItemFactory.buildItemStackArrays(Material.valueOf(c.noPermItem), "§cSmokeBomb",Arrays.asList("§cSem permissões."), 1, (byte) c.noPermItemData));
+		} else {
+			if (Gadgets.getPlayerGadget(p) == Gadgets.SMOKE_BOMB) {
+				gadgets.setItem(29, ItemFactory.buildGlowedItemStackArrays(Material.COAL_BLOCK, c.smokeBombNome.replaceAll("&", "§"), ItemFactory.colorList(c.smokebombLore), 1, (byte)0));
+			} else {
+				gadgets.setItem(29, ItemFactory.buildItemStackArrays(Material.COAL_BLOCK, c.smokeBombNome.replaceAll("&", "§"), ItemFactory.colorList(c.smokebombLore), 1, (byte)0));
+			}
+		}
+		
 		if(Gadgets.hasSelected(p)) {
 			gadgets.setItem(49, ItemFactory.buildGlowedItemStack(Material.BARRIER, "§cResetar gadget", ItemFactory.colorList(Arrays.asList("§7Clique para remover seu gadget atual!"))));
 		}else{
@@ -181,7 +222,7 @@ public class GadgetsMenu extends Menu implements Listener {
 			p.closeInventory();
 		} else if (slot == 12) {
 			p.playSound(p.getLocation(), Sound.CHICKEN_EGG_POP, 1.0F, 0.5F);
-			Gadgets.selectGadget(p, Gadgets.MEOW);
+			Gadgets.selectGadget(p, Gadgets.FUN_GUN);
 			p.closeInventory();
 		} else if (slot == 13) {
 			p.playSound(p.getLocation(), Sound.CHICKEN_EGG_POP, 1.0F, 0.5F);
@@ -218,6 +259,22 @@ public class GadgetsMenu extends Menu implements Listener {
 		}else if (slot == 23) {
 			p.playSound(p.getLocation(), Sound.CHICKEN_EGG_POP, 1.0F, 0.5F);
 			Gadgets.selectGadget(p, Gadgets.WIZARD);
+			p.closeInventory();
+		}else if (slot == 24) {
+			p.playSound(p.getLocation(), Sound.CHICKEN_EGG_POP, 1.0F, 0.5F);
+			Gadgets.selectGadget(p, Gadgets.FUMEGANTE);
+			p.closeInventory();
+		}else if (slot == 25) {
+			p.playSound(p.getLocation(), Sound.CHICKEN_EGG_POP, 1.0F, 0.5F);
+			Gadgets.selectGadget(p, Gadgets.EXPLOSIVE_POOP);
+			p.closeInventory();
+		}else if(slot == 28) {
+			p.playSound(p.getLocation(), Sound.CHICKEN_EGG_POP, 1.0F, 0.5F);
+			Gadgets.selectGadget(p, Gadgets.DISCO_BALL);
+			p.closeInventory();
+		}else if(slot == 29) {
+			p.playSound(p.getLocation(), Sound.CHICKEN_EGG_POP, 1.0F, 0.5F);
+			Gadgets.selectGadget(p, Gadgets.SMOKE_BOMB);
 			p.closeInventory();
 		}else if (slot == 49) {
 			Gadgets.selectGadget(p, Gadgets.NENHUM);

@@ -30,10 +30,11 @@ public class MainMenu extends Menu implements Listener {
 	@Override
 	public void onClick(Player p, int slot) {
 		if(slot == 4) {
-			p.closeInventory();
 			GadgetsMenu.show(p);
 		}else if(slot == 15) {
 			ParticlesMenu.show(p);
+		}else if(slot == 11) {
+			PetMenu.show(p);
 		}
 	}
 

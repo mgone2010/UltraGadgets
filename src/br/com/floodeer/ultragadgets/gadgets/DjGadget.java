@@ -79,12 +79,9 @@ public class DjGadget extends Gadget implements Listener {
 	final HashMap<ArmorStand, Boolean> animations = new HashMap<>();
 	final HashMap<ArmorStand, List<Effects>> particles = new HashMap<>();
 	final List<Effects> effects = new ArrayList<>();
-	final File song1 = new File(UltraGadgets.get().getDataFolder() + File.separator + "sons" + File.separator
-			+ UltraGadgets.getCfg().djSom1 + ".nbs");
-	final File song2 = new File(UltraGadgets.get().getDataFolder() + File.separator + "sons" + File.separator
-			+ UltraGadgets.getCfg().djSom2 + ".nbs");
-	final File song3 = new File(UltraGadgets.get().getDataFolder() + File.separator + "sons" + File.separator
-			+ UltraGadgets.getCfg().djSom3 + ".nbs");
+	final File song1 = new File(UltraGadgets.get().getDataFolder() + File.separator + "sons" + File.separator+ UltraGadgets.getCfg().djSom1 + ".nbs");
+	final File song2 = new File(UltraGadgets.get().getDataFolder() + File.separator + "sons" + File.separator+ UltraGadgets.getCfg().djSom2 + ".nbs");
+	final File song3 = new File(UltraGadgets.get().getDataFolder() + File.separator + "sons" + File.separator+ UltraGadgets.getCfg().djSom3 + ".nbs");
 
 	boolean exists() {
 		if (song1.exists() && song2.exists() && song3.exists()) {
@@ -96,36 +93,21 @@ public class DjGadget extends Gadget implements Listener {
 
 	public void showGadgetsActions(Player p) {
 		UtilMenu gadgetActions = new UtilMenu(UltraGadgets.get(), p, "§eDj Config", 3);
-		gadgetActions.setItem(0,
-				ItemFactory.buildItemStack(Material.JUKEBOX, "§e§lMúsicas", Arrays.asList("§bSelecione uma música")));
-		gadgetActions.setItem(9, ItemFactory.buildItemStack(Material.BLAZE_POWDER, "§e§lPartículas",
-				Arrays.asList("§bAtive/Desative efeitos")));
-		gadgetActions.setItem(18, ItemFactory.buildItemStack(Material.ARMOR_STAND, "§e§lAnimações",
-				Arrays.asList("§bAtive/Desative animações")));
+		gadgetActions.setItem(0,ItemFactory.buildItemStack(Material.JUKEBOX, "§e§lMúsicas", Arrays.asList("§bSelecione uma música")));
+		gadgetActions.setItem(9, ItemFactory.buildItemStack(Material.BLAZE_POWDER, "§e§lPartículas",Arrays.asList("§bAtive/Desative efeitos")));
+		gadgetActions.setItem(18, ItemFactory.buildItemStack(Material.ARMOR_STAND, "§e§lAnimações",Arrays.asList("§bAtive/Desative animações")));
 
-		gadgetActions.setItem(2,
-				ItemFactory.buildItemStack(Material.RECORD_10, UltraGadgets.getCfg().djSom1.replaceAll("&", "§"),
-						Arrays.asList("§eClique para ativar trocar a musica!")));
-		gadgetActions.setItem(3,
-				ItemFactory.buildItemStack(Material.RECORD_9, UltraGadgets.getCfg().djSom2.replaceAll("&", "§"),
-						Arrays.asList("§eClique para ativar trocar a musica!")));
-		gadgetActions.setItem(4,
-				ItemFactory.buildItemStack(Material.RECORD_7, UltraGadgets.getCfg().djSom3.replaceAll("&", "§"),
-						Arrays.asList("§eClique para ativar trocar a musica!")));
+		gadgetActions.setItem(2,ItemFactory.buildItemStack(Material.RECORD_10, UltraGadgets.getCfg().djSom1.replaceAll("&", "§"),Arrays.asList("§eClique para ativar trocar a musica!")));
+		gadgetActions.setItem(3,ItemFactory.buildItemStack(Material.RECORD_9, UltraGadgets.getCfg().djSom2.replaceAll("&", "§"),Arrays.asList("§eClique para ativar trocar a musica!")));
+		gadgetActions.setItem(4,ItemFactory.buildItemStack(Material.RECORD_7, UltraGadgets.getCfg().djSom3.replaceAll("&", "§"),Arrays.asList("§eClique para ativar trocar a musica!")));
 
-		gadgetActions.setItem(11, ItemFactory.buildItemStack(Material.NETHER_STAR, "§e§lNote Effect",
-				Arrays.asList("§eClique para ativar/desativar!")));
-		gadgetActions.setItem(12, ItemFactory.buildItemStack(Material.RECORD_11, "§e§lEfeito de Disco",
-				Arrays.asList("§eClique para ativar/desativar!")));
-		gadgetActions.setItem(13, ItemFactory.buildItemStack(Material.BEACON, "§e§lPartículas",
-				Arrays.asList("§eClique para ativar/desativar!")));
-		gadgetActions.setItem(14, ItemFactory.buildItemStack(Material.STAINED_GLASS, "§e§lDiscoBall",
-				Arrays.asList("§eClique para ativar/desativar!")));
+		gadgetActions.setItem(11, ItemFactory.buildItemStack(Material.NETHER_STAR, "§e§lNote Effect",Arrays.asList("§eClique para ativar/desativar!")));
+		gadgetActions.setItem(12, ItemFactory.buildItemStack(Material.RECORD_11, "§e§lEfeito de Disco",Arrays.asList("§eClique para ativar/desativar!")));
+		gadgetActions.setItem(13, ItemFactory.buildItemStack(Material.BEACON, "§e§lPartículas",Arrays.asList("§eClique para ativar/desativar!")));
+		gadgetActions.setItem(14, ItemFactory.buildItemStack(Material.STAINED_GLASS, "§e§lDiscoBall",Arrays.asList("§eClique para ativar/desativar!")));
 
-		gadgetActions.setItem(20, ItemFactory.buildItemStack(Material.TORCH, "§e§lAnimação",
-				Arrays.asList("§eClique para ativar/desativar!")));
-		gadgetActions.setItem(21, ItemFactory.buildItemStack(Material.SLIME_BALL, "§e§lPulo",
-				Arrays.asList("§eClique para ativar/desativar!")));
+		gadgetActions.setItem(20, ItemFactory.buildItemStack(Material.TORCH, "§e§lAnimação",Arrays.asList("§eClique para ativar/desativar!")));
+		gadgetActions.setItem(21, ItemFactory.buildItemStack(Material.SLIME_BALL, "§e§lPulo",Arrays.asList("§eClique para ativar/desativar!")));
 
 		gadgetActions.build();
 		gadgetActions.showMenu(p);
@@ -180,8 +162,7 @@ public class DjGadget extends Gadget implements Listener {
 				double random = UtilMath.randomRange(2256, 2267);
 				ItemStack disc = ItemFactory.buildItemStack(Material.RECORD_11, String.valueOf(random), "");
 				Entity e = UtilEnt.dropItemToRemove(disc, l, "gadget", 1);
-				e.setVelocity(new Vector(UtilMath.randomRange(-0.5F, 0.5F), UtilMath.randomRange(0.0F, 1.0F),
-						UtilMath.randomRange(-0.5F, 0.5F)));
+				e.setVelocity(new Vector(UtilMath.randomRange(-0.5F, 0.5F), UtilMath.randomRange(0.0F, 1.0F),UtilMath.randomRange(-0.5F, 0.5F)));
 			}
 		}, 1L, 1L).getTaskId();
 		Bukkit.getServer().getScheduler().runTaskLater(UltraGadgets.get(), new Runnable() {
@@ -336,8 +317,7 @@ public class DjGadget extends Gadget implements Listener {
 						float ratio = i * lenght / 80.0F;
 						Vector v = direction.clone().multiply(ratio);
 						UtilVelocity.rotateVector(v, Rotation, Rotation, Rotation);
-						ParticleEffect.REDSTONE.display(
-								new ParticleEffect.OrdinaryColor(UtilFirework.getRandomBukkitColor()), l.add(v), 35);
+						ParticleEffect.REDSTONE.display(new ParticleEffect.OrdinaryColor(UtilFirework.getRandomBukkitColor()), l.add(v), 35);
 						l.subtract(v);
 					}
 				}
@@ -436,8 +416,7 @@ public class DjGadget extends Gadget implements Listener {
 
 			@Override
 			public void run() {
-				if (!p.isOnline() || Gadgets.getPlayerGadget(p) != Gadgets.DJ || !djPlayer.containsKey(p)
-						|| p.getWorld() != dj.getStand().getWorld()) {
+				if (!p.isOnline() || Gadgets.getPlayerGadget(p) != Gadgets.DJ || !djPlayer.containsKey(p) || p.getWorld() != dj.getStand().getWorld()) {
 					plataform.destroy();
 					particles.remove(dj.getStand());
 					stands.remove(dj.getStand());
@@ -497,12 +476,13 @@ public class DjGadget extends Gadget implements Listener {
 	void onCooldown(Player p) {
 		long cooldown = UtilCooldown.getCooldown(p, this.gadgetName) / 1000;
 		UtilTitle title = new UtilTitle(
-				UltraGadgets.getCfg().title.replaceAll("<cooldown>", String.valueOf(cooldown)).replaceAll("<gadget>",
-						Gadgets.getPlayerGadget(p).toString().toLowerCase().replaceAll("_", "")),
-				UltraGadgets.getCfg().subtitle.replaceAll("<cooldown>", String.valueOf(cooldown))
-						.replaceAll("<gadget>", Gadgets.getPlayerGadget(p).toString().toLowerCase().replaceAll("_", ""))
-						.replaceAll("&", "§"),
-				6, 8, 6);
+		UltraGadgets.getCfg().title.replaceAll("<cooldown>", String.valueOf(cooldown))
+	   .replaceAll("<gadget>",Gadgets.getPlayerGadget(p).toString().toLowerCase()
+	   .replaceAll("_", "")),UltraGadgets.getCfg().subtitle
+	   .replaceAll("<cooldown>", String.valueOf(cooldown))
+	   .replaceAll("<gadget>", Gadgets.getPlayerGadget(p).toString().toLowerCase()
+	   .replaceAll("_", ""))
+	   .replaceAll("&", "§"),6, 8, 6);
 		title.setTimingsToTicks();
 		title.send(p);
 	}
@@ -707,15 +687,12 @@ public class DjGadget extends Gadget implements Listener {
 
 		public void buildSupport(int m, int data, int slab, int slabdata, Material glow, int glowdata, ArmorStand a) {
 			Location support = this.l.clone();
-			a.setCustomName(
-					UltraGadgets.getCfg().djDisplayName.replaceAll("<player>", p.getName()).replaceAll("&", "§"));
+			a.setCustomName(UltraGadgets.getCfg().djDisplayName.replaceAll("<player>", p.getName()).replaceAll("&", "§"));
 			a.setCustomNameVisible(true);
 			a.setBasePlate(false);
 			a.setArms(true);
 			a.setCanPickupItems(false);
-			a.setHelmet(ItemFactory.buildSkull(
-					"eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvODY4ZjRjZWY5NDlmMzJlMzNlYzVhZTg0NWY5YzU2OTgzY2JlMTMzNzVhNGRlYzQ2ZTViYmZiN2RjYjYifX19",
-					1, "Swag", null));
+			a.setHelmet(ItemFactory.buildSkull("eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvODY4ZjRjZWY5NDlmMzJlMzNlYzVhZTg0NWY5YzU2OTgzY2JlMTMzNzVhNGRlYzQ2ZTViYmZiN2RjYjYifX19",1, "Swag", null));
 			a.setChestplate(new ItemStack(Material.CHAINMAIL_CHESTPLATE));
 			a.setLeggings(new ItemStack(Material.CHAINMAIL_LEGGINGS));
 			a.setBoots(new ItemStack(Material.LEATHER_BOOTS));

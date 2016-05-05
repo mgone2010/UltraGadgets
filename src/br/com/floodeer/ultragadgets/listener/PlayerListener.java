@@ -1,5 +1,8 @@
 package br.com.floodeer.ultragadgets.listener;
 
+import java.util.Map;
+import java.util.UUID;
+
 import org.bukkit.Material;
 import org.bukkit.event.Event.Result;
 import org.bukkit.event.EventHandler;
@@ -14,14 +17,21 @@ import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.scheduler.BukkitRunnable;
 
+import com.google.common.collect.Maps;
+
 import br.com.floodeer.ultragadgets.UltraGadgets;
+import br.com.floodeer.ultragadgets.UltraPlayer;
 import br.com.floodeer.ultragadgets.enumeration.Particle;
+import br.com.floodeer.ultragadgets.enumeration.Pets;
 import br.com.floodeer.ultragadgets.menus.MainMenu;
+import br.com.floodeer.ultragadgets.pets.PetManager;
 import br.com.floodeer.ultragadgets.storage.PlayerDataFile;
 import br.com.floodeer.ultragadgets.storage.PlayerDataYaml;
 import br.com.floodeer.ultragadgets.util.ItemFactory;
 
 public class PlayerListener implements Listener {
+	
+	public static Map<UUID, UltraPlayer> ugPlayers = Maps.newHashMap();
 	
 	@EventHandler(priority = EventPriority.HIGH)
 	public void onDrop(PlayerDropItemEvent e) {
@@ -48,6 +58,12 @@ public class PlayerListener implements Listener {
 		}else if(ItemFactory.hasDisplayName(e.getItemDrop().getItemStack(), UltraGadgets.getCfg().djNome.replaceAll("&", "§"))) {
 			e.setCancelled(true);
 		}else if(ItemFactory.hasDisplayName(e.getItemDrop().getItemStack(), UltraGadgets.getCfg().gravidadeNome.replaceAll("&", "§"))) {
+			e.setCancelled(true);
+		}else if(ItemFactory.hasDisplayName(e.getItemDrop().getItemStack(), UltraGadgets.getCfg().fumeganteNome.replaceAll("&", "§"))) {
+			e.setCancelled(true);
+		}else if(ItemFactory.hasDisplayName(e.getItemDrop().getItemStack(), UltraGadgets.getCfg().explosivePoopNome.replaceAll("&", "§"))) {
+			e.setCancelled(true);
+		}else if(ItemFactory.hasDisplayName(e.getItemDrop().getItemStack(), UltraGadgets.getCfg().discoBallNome.replaceAll("&", "§"))) {
 			e.setCancelled(true);
 		}
 	}
@@ -78,6 +94,12 @@ public class PlayerListener implements Listener {
 			e.setCancelled(true);
 		}else if(ItemFactory.hasDisplayName(e.getCurrentItem(), UltraGadgets.getCfg().djNome.replaceAll("&", "§"))) {
 			e.setCancelled(true);
+		}else if(ItemFactory.hasDisplayName(e.getCurrentItem(), UltraGadgets.getCfg().fumeganteNome.replaceAll("&", "§"))) {
+			e.setCancelled(true);
+		}else if(ItemFactory.hasDisplayName(e.getCurrentItem(), UltraGadgets.getCfg().explosivePoopNome.replaceAll("&", "§"))) {
+			e.setCancelled(true);
+		}else if(ItemFactory.hasDisplayName(e.getCurrentItem(), UltraGadgets.getCfg().discoBallNome.replaceAll("&", "§"))) {
+			e.setCancelled(true);
 		}
 	}
 	
@@ -99,6 +121,8 @@ public class PlayerListener implements Listener {
 		}else if(ItemFactory.hasDisplayName(e.getItemInHand(), UltraGadgets.getCfg().djNome.replaceAll("&", "§"))) {
 			e.setCancelled(true);
 		}else if(ItemFactory.hasDisplayName(e.getItemInHand(), UltraGadgets.getCfg().gravidadeNome.replaceAll("&", "§"))) {
+			e.setCancelled(true);
+		}else if(ItemFactory.hasDisplayName(e.getItemInHand(), UltraGadgets.getCfg().discoBallNome.replaceAll("&", "§"))) {
 			e.setCancelled(true);
 		}
 	}
@@ -126,6 +150,9 @@ public class PlayerListener implements Listener {
 				e.getPlayer().getInventory().setItem(UltraGadgets.getCfg().itemSlot, 
 				ItemFactory.buildItemStack(Material.valueOf(UltraGadgets.getCfg().ugItem), 
 				UltraGadgets.getCfg().itemNome.replaceAll("&", "§"), null, 1, (byte)UltraGadgets.getCfg().ugItemData));
+				if(!ugPlayers.containsKey(e.getPlayer().getUniqueId())) {
+					ugPlayers.put(e.getPlayer().getUniqueId(), new UltraPlayer(e.getPlayer().getUniqueId()));
+				}
 			}
 		}.runTaskLater(UltraGadgets.get(), 5);
 	}
@@ -135,5 +162,21 @@ public class PlayerListener implements Listener {
 		if(Particle.hasParticle(e.getPlayer())) {
 			Particle.remove(e.getPlayer());
 		}
+		if(Pets.hasPetSpawned(e.getPlayer())) {
+			Pets.getPetEntity(e.getPlayer()).despawn();
+			if(PetManager.petEntity.containsKey(e.getPlayer().getUniqueId())) {
+				PetManager.petEntity.remove(e.getPlayer().getUniqueId());
+			}
+			if(PetManager.petType.containsKey(e.getPlayer().getUniqueId())) {
+				PetManager.petType.remove(e.getPlayer().getUniqueId());
+			}
+		}
+	}
+	
+	public static UltraPlayer get(UUID uuid) {
+		if(ugPlayers.containsKey(uuid)) {
+			return ugPlayers.get(uuid);
+		}
+		return null;
 	}
 }

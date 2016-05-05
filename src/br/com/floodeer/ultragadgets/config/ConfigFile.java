@@ -32,10 +32,10 @@ public class ConfigFile extends SkyoConfig {
 	public String subtitle = "&eAguarde &c<cooldown>&es para usar &c<gadget>";
 	
 	@ConfigOptions(name = "UltraGadgets.Config.SemPermissao-Item")
-	public String noPermItem = "STAINED_CLAY";
+	public String noPermItem = "INK_SACK";
 	
 	@ConfigOptions(name = "UltraGadgets.Config.SemPermissao-ItemData")
-	public int noPermItemData = 14;
+	public int noPermItemData = 8;
 	
 	@ConfigOptions(name = "UltraGadgets.Config.GadgetSlot")
 	public int gadgetSlot = 0;
@@ -64,16 +64,19 @@ public class ConfigFile extends SkyoConfig {
 	@ConfigOptions(name = "UltraGadgets.Config.Gadgets-GravidadeTempo")
 	public int gravityTempo = 25;
 	
-	@ConfigOptions(name = "UltraGadgets.Config.Gadgets-DjSons1Display")
+	@ConfigOptions(name = "UltraGadgets.Config.Gadgets-Dj.Sons1Display")
 	public String djSom1 = "Popcorn";
 	
-	@ConfigOptions(name = "UltraGadgets.Config.Gadgets-DjSons2Display")
+	@ConfigOptions(name = "UltraGadgets.Config.Gadgets-Dj.Sons2Display")
 	public String djSom2 = "Song of Storms";
 	
-	@ConfigOptions(name = "UltraGadgets.Config.Gadgets-DjSons3Display")
+	@ConfigOptions(name = "UltraGadgets.Config.Gadgets-Dj.Sons3Display")
 	public String djSom3 = "Smells Like Teen Spirit";
 	
-	@ConfigOptions(name = "UltraGadgets.Config.Gadgets-DjDisplay")
+	@ConfigOptions(name = "UltraGadgets.Config.Gadgets-Disco-BallSom")
+	public String discoballSom = "Dubstep";
+	
+	@ConfigOptions(name = "UltraGadgets.Config.Gadgets-Dj.Display")
 	public String djDisplayName = "&b&lDJ &e&l<player>";
 	
 	@ConfigOptions(name = "UltraGadgets.Cooldowns.BombGadget-Cooldown")
@@ -91,6 +94,9 @@ public class ConfigFile extends SkyoConfig {
 	@ConfigOptions(name = "UltraGadgets.Cooldowns.Trampolim-Cooldown")
 	public long trampolimCooldown = 60;
 	
+	@ConfigOptions(name = "UltraGadgets.Cooldowns.ExplosivePoop-Cooldown")
+	public long explosiveCooldown = 45;
+	
 	@ConfigOptions(name = "UltraGadgets.Cooldowns.IceBomb-Cooldown")
 	public long iceBombCooldown = 12;
 	
@@ -107,13 +113,19 @@ public class ConfigFile extends SkyoConfig {
 	public long gravidadeCooldown = 45;
 	
 	@ConfigOptions(name = "UltraGadgets.Cooldowns.WitherShoot-Cooldown")
-	public long witherShootCooldown = 40;
+	public long witherShootCooldown = 30;
+	
+	@ConfigOptions(name = "UltraGadgets.Cooldowns.Fumegante-Cooldown")
+	public long fumeganteCooldown = 48;
 	
 	@ConfigOptions(name = "UltraGadgets.Cooldowns.Dj-Cooldown")
 	public long djCooldown = 75;
 	
 	@ConfigOptions(name = "UltraGadgets.Cooldowns.Wizard-Cooldown")
 	public long wizardCooldown = 8;
+	
+	@ConfigOptions(name = "UltraGadgets.Cooldowns.SmokeBomb-Cooldown")
+	public long smokeBombCooldown = 38;
 	
 	@ConfigOptions(name = "UltraGadgets.Item-Nome")
 	public String itemNome = "&e&lUltraGadgets";
@@ -151,6 +163,9 @@ public class ConfigFile extends SkyoConfig {
 	@ConfigOptions(name = "UltraGadgets.Mensagens.Gadgets.VectorTNT-Nome")
 	public String vectorTNTNome = "&bVectorTNT";
 	
+	@ConfigOptions(name = "UltraGadgets.Mensagens.Gadgets.Fumegante-Nome")
+	public String fumeganteNome = "&bFumegante";
+	
 	@ConfigOptions(name = "UltraGadgets.Mensagens.Gadgets.DiscoArmor-Nome")
 	public String discoArmorNome = "&aD&bI&cS&dC&eO &1A&2R&3M&4O&5R";
 	
@@ -163,11 +178,20 @@ public class ConfigFile extends SkyoConfig {
 	@ConfigOptions(name = "UltraGadgets.Mensagens.Gadgets.Wizard-Nome")
 	public String wizardNome = "&bWizard";
 	
+	@ConfigOptions(name = "UltraGadgets.Mensagens.Gadgets.SkomeBomb-Nome")
+	public String smokeBombNome = "&bSmokeBomb";
+	
 	@ConfigOptions(name = "UltraGadgets.Mensagens.Gadgets.Dj-Nome")
 	public String djNome = "&bPlataforma Dj";
 	
+	@ConfigOptions(name = "UltraGadgets.Mensagens.Gadgets.ExplosivePoop-Nome")
+	public String explosivePoopNome = "&bExplosive Poop";
+	
 	@ConfigOptions(name = "UltraGadgets.Mensagens.Gadgets.Gravidade-Nome")
 	public String gravidadeNome = "&bGravidade";
+	
+	@ConfigOptions(name = "UltraGadgets.Mensagens.Gadgets.ExplosivePoop-Lore")
+	public List<String> explosivePlore = Arrays.asList("&6Uma festa de cores!", "&e&lCooldown: 45s");
 	
 	@ConfigOptions(name = "UltraGadgets.Mensagens.Gadgets.Bomba-Lore")
 	public List<String> bombaGadgetLore = Arrays.asList("&6BOOM");
@@ -200,17 +224,22 @@ public class ConfigFile extends SkyoConfig {
 	public List<String>  discoBallLore = Arrays.asList("&bDisco&4Ball");
 	
 	@ConfigOptions(name = "UltraGadgets.Mensagens.Gadgets.WitherShoot-Lore")
-	public List<String>  witherShootLore = Arrays.asList("&bShoot skull!");
+	public List<String>  witherShootLore = Arrays.asList("&bAtire cabeças de wither!", "&e&lCooldown: 30s");
 	
 	@ConfigOptions(name = "UltraGadgets.Mensagens.Gadgets.Wizard-Lore")
-	public List<String>  wizardLore = Arrays.asList("&bPartículas mágicas!");
+	public List<String>  wizardLore = Arrays.asList("&bPartículas mágicas!", "&e&lCooldown: 8s");
 
+	@ConfigOptions(name = "UltraGadgets.Mensagens.Gadgets.Fumegante-Lore")
+	public List<String>  fumeganteLore = Arrays.asList("&bPela ciência!", "&e&lCooldown: 48s");
 
 	@ConfigOptions(name = "UltraGadgets.Mensagens.Gadgets.Dj-Lore")
 	public List<String> djLore = Arrays.asList("&6Cria uma plataforma dj customizado!", "&e&lCooldown: 70s", "&e&lDuração: 50s");
 	
 	@ConfigOptions(name = "UltraGadgets.Mensagens.Gadgets.Gravidade-Lore")
 	public List<String> gravidadeLore = Arrays.asList("&6Yeah! Adiciona gravidade!", "&e&lCooldown: 45s", "&e&lDuração: 25s");
+	
+	@ConfigOptions(name = "UltraGadgets.Mensagens.Gadgets.SkomeBomb-Lore")
+	public List<String>  smokebombLore = Arrays.asList("&bSUMIU!", "&e&lCooldown: 48s");
 	
 	public ConfigFile(File configFile) {
 		super(configFile, Arrays.asList("UltraGadgets Configuração", 

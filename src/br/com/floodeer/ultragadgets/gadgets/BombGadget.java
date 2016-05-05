@@ -79,9 +79,9 @@ public class BombGadget extends Gadget implements Listener {
 		long cooldown = UtilCooldown.getCooldown(p, this.gadgetName) / 1000;
 		UtilTitle title = new UtilTitle(
 		UltraGadgets.getCfg().title.replaceAll("<cooldown>", String.valueOf(cooldown)).replaceAll("<gadget>",
-		Gadgets.getPlayerGadget(p).toString().toLowerCase().replaceAll("_", "")),
+		UltraGadgets.getCfg().bombaGadgetNome),
 		UltraGadgets.getCfg().subtitle.replaceAll("<cooldown>", String.valueOf(cooldown)).replaceAll("<gadget>",
-		Gadgets.getPlayerGadget(p).toString().toLowerCase().replaceAll("_", "")).replaceAll("&", "§"),
+	    UltraGadgets.getCfg().bombaGadgetNome).replaceAll("&", "§"),
 		6, 8, 6);
 		title.setTimingsToTicks();
 		title.send(p);

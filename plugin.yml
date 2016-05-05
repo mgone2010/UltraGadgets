@@ -1,0 +1,10 @@
+name: UltraGadgets
+version: 1.0.0
+main: br.com.floodeer.ultragadgets.UltraGadgets
+author: Floodeer
+prefix: UltraGadgets
+commands:
+  ultragadgets:
+   description: Comando UltraGadgets
+   aliases: [ug]
+   permission: ug.comando

@@ -1,0 +1,137 @@
+##################################################################################################################
+A config.yml é gerada atualizada por padrão, esse arquivo é só um exemplo de como e o que você pode configurar.
+##################################################################################################################
+
+# UltraGadgets Configuração
+# DJGadget: Para trocar as músicas, basta mudar o nome para o nome EXATO da musica na pasta sons.
+# Não use o Cooldown menor que a duração do Gadget, pode pausar problemas!
+# Adicione quantas linhas quiser nos Lores dos menus!
+# Você pode usar acentuação gráfica; Suporte UTF-8.
+# UltraGadgets Configuração
+# DJGadget: Para trocar as músicas, basta mudar o nome para o nome EXATO da musica na pasta sons.
+# Não use o Cooldown menor que a duração do Gadget, pode pausar problemas!
+# Adicione quantas linhas quiser nos Lores dos menus!
+# Você pode usar acentuação gráfica; Suporte UTF-8.
+UltraGadgets:
+  MySQL:
+    Habilitar: 'false'
+    Host: 0.0.0.0
+    Porta: '3306'
+    Usuario: user
+    Senha: password
+    Database: database
+  Mensagens:
+    Titulo: '&c&lRecarregando!'
+    Subtitulo: '&eAguarde &c<cooldown>&es para usar &c<gadget>'
+    Menus:
+      Main: '&e&lUltraGadgets'
+      Particulas: '&e&lParticulas'
+      Gadgets: '&e&lGadgets'
+    Gadgets:
+      Bomba-Nome: '&bBomba'
+      Meow-Nome: '&bMeow'
+      PartyPopper-Nome: '&bPartyPopper'
+      PaintballGun-Nome: '&bPaintballGun'
+      Paraquedas-Nome: '&bParaquedas'
+      Trampolim-Nome: '&bTrampolim'
+      IceBomb-Nome: '&bBomba de gelo'
+      VectorTNT-Nome: '&bVectorTNT'
+      Fumegante-Nome: '&bFumegante'
+      DiscoArmor-Nome: '&aD&bI&cS&dC&eO &1A&2R&3M&4O&5R'
+      DiscoBall-Nome: '&bDiscoBall'
+      WitherShoot-Nome: '&bWitherShoot'
+      Wizard-Nome: '&bWizard'
+      Dj-Nome: '&bPlataforma Dj'
+      ExplosivePoop-Nome: '&bExplosive Poop'
+      Gravidade-Nome: '&bGravidade'
+      ExplosivePoop-Lore:
+      - '&6Uma festa de cores!'
+      - '&e&lCooldown: 45s'
+      Bomba-Lore:
+      - '&6BOOM'
+      Meow-Lore:
+      - '&6Atire Enderpearls e bolas de neve!'
+      - '&e&lCooldown: 5s'
+      PartyPopper-Lore:
+      - '&6Uma festa de cores!'
+      - '&e&lCooldown: 42s'
+      PaintballGun-Lore:
+      - "&6Sinta-se livre para pintar o ch\xe3o!"
+      - '&e&lCooldown: 0s'
+      Paraquedas-Lore:
+      - '&6Feito para cair com estilo!'
+      - '&e&lCooldown: 40s'
+      IceBomb-Lore:
+      - "&6Fa\xe7a uma chuva de gelo!"
+      - '&e&lCooldown: 12s'
+      VectorTNT-Lore:
+      - "&6Cria uma erup\xe7\xe3o de TNT"
+      - '&e&lCooldown: 40s'
+      Trampolim-Lore:
+      - '&6Cria um trampolim!'
+      - '&e&lCooldown: 60s'
+      - "&e&lDura\xe7\xe3o: 30s"
+      DiscoArmor-Lore:
+      - '&eC&bO&aR&cE&dS'
+      DiscoBall-Lore:
+      - '&bDisco&4Ball'
+      WitherShoot-Lore:
+      - "&bAtire cabe\xe7as de wither!"
+      - '&e&lCooldown: 30s'
+      Wizard-Lore:
+      - "&bPart\xedculas m\xe1gicas!"
+      - '&e&lCooldown: 8s'
+      Fumegante-Lore:
+      - "&bPela ci\xeancia!"
+      - '&e&lCooldown: 48s'
+      Dj-Lore:
+      - '&6Cria uma plataforma dj customizado!'
+      - '&e&lCooldown: 70s'
+      - "&e&lDura\xe7\xe3o: 50s"
+      Gravidade-Lore:
+      - '&6Yeah! Adiciona gravidade!'
+      - '&e&lCooldown: 45s'
+      - "&e&lDura\xe7\xe3o: 25s"
+      SkomeBomb-Nome: '&bSmokeBomb'
+      SkomeBomb-Lore:
+      - '&bSUMIU!'
+      - '&e&lCooldown: 48s'
+  Config:
+    SemPermissao-Item: INK_SACK
+    SemPermissao-ItemData: '8'
+    GadgetSlot: '0'
+    itemSlot: '8'
+    UltraGadgets-Item: BEACON
+    UltraGadgets-ItemData: '0'
+    NerfGadgetsLag: 'false'
+    Mundos-Desabilitar:
+    - World1
+    - World2
+    - MyWorld
+    Gadgets-TrampolimTempo: '70'
+    Gadgets-DjTempo: '50'
+    Gadgets-GravidadeTempo: '25'
+    Gadgets-Dj:
+      Sons1Display: Popcorn
+      Sons2Display: Song of Storms
+      Sons3Display: Smells Like Teen Spirit
+      Display: '&b&lDJ &e&l<player>'
+    Gadgets-Disco-BallSom: Dubstep
+  Cooldowns:
+    BombGadget-Cooldown: '16'
+    MeowGadget-Cooldown: '5'
+    PartyPopper-Cooldown: '42'
+    Paraquedas-Cooldown: '40'
+    Trampolim-Cooldown: '60'
+    ExplosivePoop-Cooldown: '45'
+    IceBomb-Cooldown: '12'
+    VectorTNT-Cooldown: '40'
+    DiscoArmor-Cooldown: '40'
+    DiscoBall-Cooldown: '60'
+    Gravidade-Cooldown: '45'
+    WitherShoot-Cooldown: '30'
+    Fumegante-Cooldown: '48'
+    Dj-Cooldown: '75'
+    Wizard-Cooldown: '8'
+    SmokeBomb-Cooldown: '8'
+  Item-Nome: '&e&lUltraGadgets'
